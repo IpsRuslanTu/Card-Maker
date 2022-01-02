@@ -1,0 +1,9 @@
+.easel
+{
+    background: #1d1d27;
+    flex: 1 0 auto;
+    border: 1px solid #373945;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,33 @@
+.tools
+{
+    flex: 0 0 60px;
+    background-color: #242632;
+    border: 1px solid #373945;
+}
+
+.button
+{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 45px;
+    height: 45px;
+    margin: 0 auto;
+    background-color: #242632;
+    border: none; 
+    outline: none;
+    margin-top: 10px;
+}
+
+.button:hover
+{
+    background: #45495e;
+    border-radius: 5px;
+}
+
+.button__image
+{
+    width: 35px;
+    height: 35px;
+    opacity: 0.2;
+}

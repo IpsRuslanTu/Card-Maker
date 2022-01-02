@@ -1,0 +1,61 @@
+.desc
+{
+    width: 100%;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title
+{
+    color: rgb(211, 201, 201);
+    margin: 0 0 20px 0;
+    font: 600 22px "Poppins";
+    letter-spacing: 3px;
+}
+
+.button
+{
+    font: 500 16px "Poppins";
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(99, 118, 201);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.label
+{
+    color: rgb(211, 201, 201);
+    margin-bottom: 10px;
+}
+
+.select
+{
+    margin-bottom: 20px;
+    background: rgb(211, 201, 201);
+}
+
+.select option
+{
+    background: rgb(211, 201, 201);
+}
+
+.greeting
+{
+    position: absolute;
+    padding: 0 36px;
+    color: #b7b9b9;
+    text-align: center;
+    font-size: 25px;
+    line-height: 60px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.greeting span
+{
+    color: red;
+    font-size: 50px;
+}
