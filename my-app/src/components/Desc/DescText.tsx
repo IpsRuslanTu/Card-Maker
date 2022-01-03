@@ -12,7 +12,7 @@ const DescText = () => {
     }
 
     return (
-        <div className={styles.desc} style={ (visibleDescText === 1) ? {display: "block"} : {display: "none"}}>
+        <div className={styles.desc} style={ visibleDescText ? {display: "block"} : {display: "none"} }>
             <p className={styles.title}>Text</p>
             <button className={styles.button} onClick={addText}>Add Text</button>
 

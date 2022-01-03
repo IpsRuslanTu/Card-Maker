@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux'
 import { buttonsReducer } from './buttonsReducer';
-import {composeWithDevTools} from 'redux-devtools-extension'
 import { backgroundReducer } from './backgroundReducer';
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 const rootReducer = combineReducers({
     buttonsDesc: buttonsReducer,

@@ -8,7 +8,7 @@ const DescSave = () => {
     const visibleDescSave = useSelector((state: RootState) => state.buttonsDesc.visibleDescSave);
 
     return (
-        <div className={styles.desc} style={(visibleDescSave === 1) ? {display: "block"} : {display: "none"}}>
+        <div className={styles.desc} style={visibleDescSave ? {display: "block"} : {display: "none"}}>
             <p className={styles.title}>Choose format:</p>
             <button className={styles.button}>PNG</button>
             <button className={styles.button}>JPEG</button>

@@ -1,33 +1,39 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
+import { changeBackground } from '../../store/backgroundReducer';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
 
-const DescBackground = () => {
+const DescBackground = (props: Props) => {
 
-    const dispatch = useDispatch()
     const visibleDescBackground = useSelector((state: RootState) => state.buttonsDesc.visibleDescBackground);
-
-    let colorBG : string | null;
-
-    const getColor = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        colorBG = e.target.value;
-    }
-
-    const changeBackground = () => {
-        dispatch({type: "CHANGE_BACKGROUND", payload: (colorBG !=null) ? colorBG : '#cec7b4'})
-    }
-
+    
     return (
         <div 
             className={styles.desc} 
-            style={ (visibleDescBackground === 1) ? {display: "block"} : {display: "none"} }
+            style={ visibleDescBackground ? {display: "block"} : {display: "none"} }
         >
             <p className={styles.title}>Background</p>
-            <button className={styles.button} onClick={changeBackground}>Change Background</button>
             <p className={styles.label}>Color background:</p>
-            <input type="color" name="colorPickerText" id="colorPickerText" onChange={getColor} />
+            <input 
+                onChange={(e) => props.changeBackground(e.target.value)}
+                type="color" 
+            />
         </div>
     )
 }
 
-export default DescBackground;
+type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = ReturnType<typeof mapDispatchToProps>
+type Props = StateProps & DispatchProps;
+
+function mapStateToProps(state: RootState) {
+    return {bgColor: state.stateBackground.bgColor}
+}
+
+const mapDispatchToProps = (dispatch: Function) => {
+    return {
+        changeBackground: (newColor: string) => dispatch(changeBackground(newColor))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DescBackground);

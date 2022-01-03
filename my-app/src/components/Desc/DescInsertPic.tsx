@@ -7,7 +7,7 @@ const DescInsertPic = () => {
     const visibleDescInsertPic = useSelector((state: RootState) => state.buttonsDesc.visibleDescInsertPic);
     
     return (
-        <div className={style.desc} style={ (visibleDescInsertPic === 1) ? {display: "block"} : {display: "none"}}>
+        <div className={style.desc} style={ visibleDescInsertPic ? {display: "block"} : {display: "none"}}>
             <p className={style.title}>Insert image:</p>
             <button className={style.button}>from PC</button>
             <button className={style.button}>from Pexels.com</button>

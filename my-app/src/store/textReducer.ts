@@ -6,7 +6,11 @@ type textReducerType = {
 
 type textAction = {
     type: string,
-    payload: any
+    payload: {
+        fontFamily: string,
+        fontSize: string,
+        fontColor: string
+    }
 }
 
 const defaultState: textReducerType = {
@@ -18,7 +22,7 @@ const defaultState: textReducerType = {
 export const backgroundReducer = (state = defaultState, action: textAction) :textReducerType => {
     switch (action.type) {
         case "PARAMS_TEXT":
-            return {...state, fontSize: action.payload, fontFamily: action.payload, color: action.payload}
+            return {...state, fontFamily: action.payload.fontFamily}
         default:
             return state
     }

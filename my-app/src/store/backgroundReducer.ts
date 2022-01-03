@@ -1,20 +1,26 @@
+import { AnyAction } from "redux";
+
+const CHANGE_BACKGROUND = "CHANGE_BACKGROUND";
+
 type backgroundReducerType = {
     bgColor: string
-}
-
-type backgroundAction = {
-    type: string,
-    payload: string
 }
 
 const defaultState: backgroundReducerType = {
     bgColor: '#cec7b4'
 }
 
-export const backgroundReducer = (state = defaultState, action: backgroundAction) :backgroundReducerType => {
+export function changeBackground(newColor: string): AnyAction {
+    return {
+        type: CHANGE_BACKGROUND,
+        newColor: newColor
+    }
+}
+
+export const backgroundReducer = (state = defaultState, action: AnyAction) :backgroundReducerType => {
     switch (action.type) {
-        case "CHANGE_BACKGROUND":
-            return {...state, bgColor: action.payload}
+        case CHANGE_BACKGROUND:
+            return {...state, bgColor: action.newColor}
         default:
             return state
     }

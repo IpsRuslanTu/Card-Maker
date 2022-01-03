@@ -1,39 +1,37 @@
 type buttonsReducerType = {
-    visibleDescGreetings: number,
-    visibleDescArtObj: number,
-    visibleDescBackground: number,
-    visibleDescInsertPic: number,
-    visibleDescSave: number,
-    visibleDescText: number
+    visibleDescGreetings: boolean,
+    visibleDescArtObj: boolean,
+    visibleDescBackground: boolean,
+    visibleDescInsertPic: boolean,
+    visibleDescSave: boolean,
+    visibleDescText: boolean
 }
 
 type buttonsAction = {
     type: string,
-    payload: number
+    payload: boolean
 }
 
 const defaultState: buttonsReducerType = {
-    visibleDescGreetings: 1,
-    visibleDescArtObj: 0,
-    visibleDescBackground: 0,
-    visibleDescInsertPic: 0,
-    visibleDescSave: 0,
-    visibleDescText: 0
+    visibleDescGreetings: true,
+    visibleDescArtObj: false,
+    visibleDescBackground: false,
+    visibleDescInsertPic: false,
+    visibleDescSave: false,
+    visibleDescText: false
 }
 
 export const buttonsReducer = (state = defaultState, action: buttonsAction) :buttonsReducerType => {
     switch (action.type) {
         case "CLEAR_DESC":
             return {...state, 
-                visibleDescGreetings: 0, 
-                visibleDescArtObj: 0,
-                visibleDescBackground: 0,
-                visibleDescInsertPic: 0,
-                visibleDescSave: 0,
-                visibleDescText: 0
+                visibleDescGreetings: false, 
+                visibleDescArtObj: false,
+                visibleDescBackground: false,
+                visibleDescInsertPic: false,
+                visibleDescSave: false,
+                visibleDescText: false
             }
-        case "RENDER_DESC_GREETING":
-            return {...state, visibleDescGreetings: action.payload}
         case "RENDER_DESC_ARTOBJ":
             return {...state, visibleDescArtObj: action.payload}
         case "RENDER_DESC_BACKGROUND":

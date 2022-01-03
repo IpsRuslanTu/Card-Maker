@@ -7,27 +7,27 @@ const Tools = () => {
 
     const openDescBackground = () => {
         dispatch({type: "CLEAR_DESC"});
-        dispatch({type: "RENDER_DESC_BACKGROUND", payload: 1})
+        dispatch({type: "RENDER_DESC_BACKGROUND", payload: true})
     }
 
     const openDescImg = () => {
         dispatch({type: "CLEAR_DESC"});
-        dispatch({type: "RENDER_DESC_INSERT_PIC", payload: 1})
+        dispatch({type: "RENDER_DESC_INSERT_PIC", payload: true})
     }
 
     const openDescText = () => {
         dispatch({type: "CLEAR_DESC"});
-        dispatch({type: "RENDER_DESC_TEXT", payload: 1})
+        dispatch({type: "RENDER_DESC_TEXT", payload: true})
     }
 
     const openDescArtObj = () => {
         dispatch({type: "CLEAR_DESC"});
-        dispatch({type: "RENDER_DESC_ARTOBJ", payload: 1})
+        dispatch({type: "RENDER_DESC_ARTOBJ", payload: true})
     }
 
     const openDescSave = () => {
         dispatch({type: "CLEAR_DESC"});
-        dispatch({type: "RENDER_DESC_SAVE", payload: 1})
+        dispatch({type: "RENDER_DESC_SAVE", payload: true})
     }
 
     const buttons = [
