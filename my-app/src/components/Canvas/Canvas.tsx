@@ -1,14 +1,29 @@
-import { useSelector } from 'react-redux';
-import style from './Canvas.module.css';
+import { connect, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
-const Canvas = () => {
-
-    const bgColor: string = useSelector((state: RootState) => state.stateBackground.bgColor)
+const Canvas = (props: Props) => {
 
     return (
-        <div className={style.canvas} style={{background: bgColor}}></div>
+        <div style={{background: props.color, width: props.width + 'px', height: props.height + 'px'}}></div>
     )
 }
 
-export default Canvas;
+type StateProps = ReturnType<typeof mapStateToProps>
+// type DispatchProps = ReturnType<typeof mapDispatchToProps>
+type Props = StateProps;
+
+function mapStateToProps(state: RootState) {
+    return {
+        color: state.stateBackground.bgColor,
+        width: state.stateBackground.width,
+        height: state.stateBackground.height
+    }
+}
+
+// const mapDispatchToProps = (dispatch: Function) => {
+//     return {
+//         changeBackground: (newColor: string) => dispatch(changeBackground(newColor))
+//     }
+// }
+
+export default connect(mapStateToProps)(Canvas);
