@@ -1,3 +1,5 @@
+const RENDER_DESC_ARTOBJ = "RENDER_DESC_ARTOBJ"
+
 type buttonsReducerType = {
     visibleDescGreetings: boolean,
     visibleDescArtObj: boolean,
@@ -32,7 +34,7 @@ export const buttonsReducer = (state = defaultState, action: buttonsAction) :but
                 visibleDescSave: false,
                 visibleDescText: false
             }
-        case "RENDER_DESC_ARTOBJ":
+        case RENDER_DESC_ARTOBJ:
             return {...state, visibleDescArtObj: action.payload}
         case "RENDER_DESC_BACKGROUND":
             return {...state, visibleDescBackground: action.payload}

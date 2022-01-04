@@ -1,29 +1,42 @@
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { RootState } from '../../store/store';
 
-const Canvas = (props: Props) => {
+const Canvas = (props: StateProps) => {
 
     return (
-        <div style={{background: props.color, width: props.width + 'px', height: props.height + 'px'}}></div>
+        <div style={{
+            background: props.colorBG, 
+            width: props.widthBG + 'px', 
+            height: props.heightBG + 'px',
+            position: "relative"
+        }}>
+            {   
+                (props.newImage.arr.length > 0) 
+                    ? props.newImage.arr.map( 
+                        (item, index) => 
+                            <img 
+                                src={props.newImage.arr[index].src}  
+                                style={{
+                                    position: "absolute",
+                                    display: "block",
+
+                                }} 
+                            />) 
+                    : null
+            }
+        </div>
     )
 }
 
 type StateProps = ReturnType<typeof mapStateToProps>
-// type DispatchProps = ReturnType<typeof mapDispatchToProps>
-type Props = StateProps;
 
 function mapStateToProps(state: RootState) {
     return {
-        color: state.stateBackground.bgColor,
-        width: state.stateBackground.width,
-        height: state.stateBackground.height
+        colorBG: state.stateBackground.bgColor,
+        widthBG: state.stateBackground.width,
+        heightBG: state.stateBackground.height,
+        newImage: state.workWithImg
     }
 }
-
-// const mapDispatchToProps = (dispatch: Function) => {
-//     return {
-//         changeBackground: (newColor: string) => dispatch(changeBackground(newColor))
-//     }
-// }
 
 export default connect(mapStateToProps)(Canvas);

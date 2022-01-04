@@ -63,4 +63,11 @@
 .input
 {
     margin-bottom: 20px;
+    padding-left: 10px;
+    background-color: rgb(212, 208, 208);
+}
+
+.inputColor
+{
+    margin-bottom: 30px;
 }

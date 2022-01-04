@@ -35,7 +35,7 @@ const Tools = () => {
         { id: '2', title: 'Templates', nameImg: 'templates', onClick: () => { } },
         { id: '3', title: 'Add Background', nameImg: 'add-background', onClick: openDescBackground },
         { id: '4', title: 'Add Picture', nameImg: 'add-picture', onClick: openDescImg },
-        { id: '5', title: 'Add Art-object', nameImg: 'add-circle', onClick: openDescArtObj },
+        { id: '5', title: 'Add Art-object', nameImg: 'add-artobj', onClick: openDescArtObj },
         { id: '6', title: 'Add Text', nameImg: 'add-text', onClick: openDescText },
         { id: '7', title: 'Save', nameImg: 'save', onClick: openDescSave },
         { id: '8', title: 'Undo', nameImg: 'undo', onClick: () => { } },

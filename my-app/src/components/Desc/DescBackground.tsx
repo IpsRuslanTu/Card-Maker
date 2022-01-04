@@ -15,16 +15,26 @@ const DescBackground = (props: Props) => {
             <p className={styles.title}>Background</p>
             <p className={styles.label}>Color background:</p>
             <input 
-                className={styles.input}
+                className={styles.inputColor}
                 onChange={(e) => props.changeBackground(e.target.value)}
                 type="color" 
             />
 
             <p className={styles.title}>Size canvas</p>
             <p className={styles.label}>Width:</p>
-            <input className={styles.input} type="number" value={props.width} onChange={(e) => props.changeWidthCanvas(Number(e.target.value))} />
+            <input 
+                className={styles.input} 
+                type="number" 
+                value={props.width} 
+                onChange={(e) => props.changeWidthCanvas(Number(e.target.value))} 
+            />
             <p className={styles.label}>Height:</p>
-            <input className={styles.input} type="number" value={props.height} onChange={(e) => props.changeHeigthCanvas(Number(e.target.value))} />
+            <input 
+                className={styles.input} 
+                type="number" 
+                value={props.height} 
+                onChange={(e) => props.changeHeigthCanvas(Number(e.target.value))} 
+            />
         </div>
     )
 }
