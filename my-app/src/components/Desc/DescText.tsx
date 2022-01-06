@@ -1,34 +1,25 @@
-import React from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
+import TextAtr from './TextAtr';
 
 const DescText = () => {
 
     const visibleDescText = useSelector((state: RootState) => state.buttonsDesc.visibleDescText);
 
-    const addText = () => {
-        
-    }
+    const fontSizes = ['6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '26', 
+    '28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58', '60']
+    const fontFamilies = ['Arial', 'Times New Roman', 'Calibri']
+    const fontStyles = ['Regular', 'Cursive', 'Bold', 'Underlined']
 
     return (
         <div className={styles.desc} style={ visibleDescText ? {display: "block"} : {display: "none"} }>
             <p className={styles.title}>Text</p>
-            <button className={styles.button} onClick={addText}>Add Text</button>
+            <button className={styles.button} >Add Text</button>
 
-            <p className={styles.label}>Font size:</p>
-            <select className={styles.select} name="fontSize">
-                <option value="20">20</option>
-                <option value="30">30</option>
-                <option value="40">40</option>
-            </select>
-
-            <p className={styles.label}>Font family:</p>
-            <select className={styles.select} name="fontFamily">
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Calibri">Calibri</option>
-            </select>
+            <TextAtr arr={fontSizes} title="Font size"/>
+            <TextAtr arr={fontFamilies} title="Font family"/>
+            <TextAtr arr={fontStyles} title="Font style"/>
 
             <p className={styles.label}>Color text:</p>
             <input type="color" name="colorPickerText" id="colorPickerText" />

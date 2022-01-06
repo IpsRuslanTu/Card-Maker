@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { RootState } from '../../store/store';
+import Images from './Image/Image';
 
 const Canvas = (props: StateProps) => {
 
@@ -10,20 +11,7 @@ const Canvas = (props: StateProps) => {
             height: props.heightBG + 'px',
             position: "relative"
         }}>
-            {   
-                (props.newImage.arr.length > 0) 
-                    ? props.newImage.arr.map( 
-                        (item, index) => 
-                            <img 
-                                src={props.newImage.arr[index].src}  
-                                style={{
-                                    position: "absolute",
-                                    display: "block",
-
-                                }} 
-                            />) 
-                    : null
-            }
+            <Images />
         </div>
     )
 }
@@ -35,7 +23,7 @@ function mapStateToProps(state: RootState) {
         colorBG: state.stateBackground.bgColor,
         widthBG: state.stateBackground.width,
         heightBG: state.stateBackground.height,
-        newImage: state.workWithImg
+        // newImage: state.workWithImg
     }
 }
 

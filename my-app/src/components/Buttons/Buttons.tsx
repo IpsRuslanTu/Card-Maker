@@ -1,4 +1,4 @@
-import style from './Tools.module.css';
+import style from './Buttons.module.css';
 import { useDispatch } from 'react-redux';
 
 const Tools = () => {
