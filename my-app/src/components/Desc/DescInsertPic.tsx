@@ -5,9 +5,9 @@ import { insertImg } from '../../store/insertImgReducer';
 import { RootState } from '../../store/store'
 import style from './Desc.module.css'
 
-const DescInsertPic = (props: Props) => {
+const DescInsertPic = (props: DispatchProps) => {
 
-    const visibleDescInsertPic = useSelector((state: RootState) => state.buttonsDesc.visibleDescInsertPic);
+    const visibleDescInsertPic = useSelector((state: RootState) => state.buttonsReducer.visibleDescInsertPic);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const selectedImageUrlRef = useRef<string>();
@@ -58,20 +58,12 @@ const DescInsertPic = (props: Props) => {
                 style={{display: 'none'}}
             />
 
-<button className={style.button}>from Pexels.com</button>
+            <button className={style.button}>from Pexels.com</button>
         </div>
     )
 }
 
-type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
-type Props = StateProps & DispatchProps;
-
-function mapStateToProps(state: RootState) {
-    return {
-
-    }
-}
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
@@ -79,4 +71,4 @@ const mapDispatchToProps = (dispatch: Function) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DescInsertPic);
+export default connect(null, mapDispatchToProps)(DescInsertPic);

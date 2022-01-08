@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { RootState } from '../../store/store';
-import Images from './Image/Image';
+import Images from './Images';
+import Texts from './Texts';
 
 const Canvas = (props: StateProps) => {
 
@@ -12,6 +13,7 @@ const Canvas = (props: StateProps) => {
             position: "relative"
         }}>
             <Images />
+            <Texts />
         </div>
     )
 }
@@ -20,10 +22,9 @@ type StateProps = ReturnType<typeof mapStateToProps>
 
 function mapStateToProps(state: RootState) {
     return {
-        colorBG: state.stateBackground.bgColor,
-        widthBG: state.stateBackground.width,
-        heightBG: state.stateBackground.height,
-        // newImage: state.workWithImg
+        colorBG: state.backgroundReducer.bgColor,
+        widthBG: state.backgroundReducer.width,
+        heightBG: state.backgroundReducer.height,
     }
 }
 

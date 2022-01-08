@@ -1,13 +1,15 @@
 import { createStore, combineReducers } from 'redux'
-import { buttonsReducer } from './buttonsReducer';
-import { backgroundReducer } from './backgroundReducer';
+import { buttonsReducer } from './buttonsReducer'
+import { backgroundReducer } from './backgroundReducer'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import { insertImgReducer } from './insertImgReducer';
+import { ReducerImg } from './insertImgReducer'
+import { ReducerText } from './insertTextReducer'
 
 const rootReducer = combineReducers({
-    buttonsDesc: buttonsReducer,
-    stateBackground: backgroundReducer,
-    workWithImg: insertImgReducer
+    buttonsReducer,
+    backgroundReducer,
+    ReducerImg,
+    ReducerText
 })
 
 export const store = createStore(rootReducer, composeWithDevTools());

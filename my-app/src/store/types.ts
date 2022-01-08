@@ -1,25 +1,31 @@
+export type ContentType = ImageType | TextType | ArtObjType;
+
 export type ImageType = {
+    // kind: 'image'
     src: string
-    id: string
+    // id: string
     width?: string
     height?: string
-    x: number
-    y: number
+    x: string
+    y: string
 }
 
 export type TextType = {
-    id: string
+    // kind: 'text'
+    // id: string
     width?: string
     height?: string
-    x: number
-    y: number
-    text: string
-    fontSize: number
+    x: string
+    y: string
+    text: string,
+    fontWeight: string,
+    fontSize: string
     fontColor: string
     fontFamily: string
 }
 
 export type ArtObjType = {
+    // kind: 'artobj'
     id: string
     width?: string
     height?: string

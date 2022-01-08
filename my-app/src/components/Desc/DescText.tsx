@@ -1,31 +1,44 @@
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import { getFontColor, getFontFamily, getFontSize, getFontWeight, insertText } from '../../store/insertTextReducer';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
 import TextAtr from './TextAtr';
+import { fontFamilies, fontSizes, fontWeights } from './textConstants';
 
-const DescText = () => {
+const DescText = (props: DispatchProps) => {
 
-    const visibleDescText = useSelector((state: RootState) => state.buttonsDesc.visibleDescText);
+    const visibleDescText = useSelector((state: RootState) => state.buttonsReducer.visibleDescText);
 
-    const fontSizes = ['6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '26', 
-    '28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58', '60']
-    const fontFamilies = ['Arial', 'Times New Roman', 'Calibri']
-    const fontStyles = ['Regular', 'Cursive', 'Bold', 'Underlined']
 
     return (
         <div className={styles.desc} style={ visibleDescText ? {display: "block"} : {display: "none"} }>
             <p className={styles.title}>Text</p>
-            <button className={styles.button} >Add Text</button>
+            <button className={styles.button} onClick={props.insertText} >Add Text</button>
 
-            <TextAtr arr={fontSizes} title="Font size"/>
-            <TextAtr arr={fontFamilies} title="Font family"/>
-            <TextAtr arr={fontStyles} title="Font style"/>
+            <TextAtr arr={fontSizes} getParam={getFontSize} title="Font size"/>
+            <TextAtr arr={fontFamilies} getParam={getFontFamily} title="Font family"/>
+            <TextAtr arr={fontWeights} getParam={getFontWeight} title="Font style"/>
 
             <p className={styles.label}>Color text:</p>
-            <input type="color" name="colorPickerText" id="colorPickerText" />
+            <input 
+                type="color" 
+                onChange={(e) => props.getFontColor(e.target.value)} 
+            />
 
         </div>
     )
 }
 
-export default DescText;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>
+
+const mapDispatchToProps = (dispatch: Function) => {
+    return {
+        insertText: () => dispatch(insertText()),
+        getFontSize: (newFontSize: string) => dispatch(getFontSize(newFontSize)),
+        getFontFamily: (newFontFamily: string) => dispatch(getFontFamily(newFontFamily)),
+        getFontWeight: (newFontWeight: string) => dispatch(getFontWeight(newFontWeight)),
+        getFontColor: (newFontColor: string) => dispatch(getFontColor(newFontColor))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(DescText);

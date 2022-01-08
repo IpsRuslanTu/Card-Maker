@@ -5,7 +5,7 @@ import styles from './Desc.module.css'
 
 const DescArtObj = () => {
 
-    const visibleDescArtObj = useSelector((state: RootState) => state.buttonsDesc.visibleDescArtObj);
+    const visibleDescArtObj = useSelector((state: RootState) => state.buttonsReducer.visibleDescArtObj);
 
     return (
         <div className={styles.desc} style={visibleDescArtObj ? {display: "block"} : {display: "none"}}>

@@ -4,7 +4,7 @@ import styles from './Desc.module.css'
 
 const DescGreetings = () => {
 
-    const visibleDescGreeting = useSelector((state: RootState) => state.buttonsDesc.visibleDescGreetings);
+    const visibleDescGreeting = useSelector((state: RootState) => state.buttonsReducer.visibleDescGreetings);
 
     return (
         <div style={ visibleDescGreeting ? {display: "block"} : {display: "none"} }>

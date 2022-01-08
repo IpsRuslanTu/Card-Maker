@@ -5,7 +5,7 @@ import styles from './Desc.module.css'
 
 const DescBackground = (props: Props) => {
 
-    const visibleDescBackground = useSelector((state: RootState) => state.buttonsDesc.visibleDescBackground);
+    const visibleDescBackground = useSelector((state: RootState) => state.buttonsReducer.visibleDescBackground);
 
     return (
         <div 
@@ -45,9 +45,9 @@ type Props = StateProps & DispatchProps;
 
 function mapStateToProps(state: RootState) {
     return {
-        bgColor: state.stateBackground.bgColor,
-        width: state.stateBackground.width,
-        height: state.stateBackground.height
+        bgColor: state.backgroundReducer.bgColor,
+        width: state.backgroundReducer.width,
+        height: state.backgroundReducer.height
     }
 }
 

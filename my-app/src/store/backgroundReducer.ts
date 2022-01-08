@@ -1,5 +1,6 @@
 import { AnyAction } from "redux";
 
+const CREATE_DEFAULT_BACKGROUND = "CREATE_DEFAULT_BACKGROUND";
 const CHANGE_BACKGROUND = "CHANGE_BACKGROUND";
 const CHANGE_WIDTH_CANVAS = "CHANGE_WIDTH_CANVAS";
 const CHANGE_HEIGTH_CANVAS = "CHANGE_HEIGTH_CANVAS";
@@ -37,8 +38,19 @@ export function changeHeigthCanvas(newHeight: number): AnyAction {
     }
 }
 
+export function createDefaultBG(): AnyAction {
+    return {
+        type: CREATE_DEFAULT_BACKGROUND,
+        newColor: '#cec7b4',
+        width: 700,
+        height: 450
+    }
+}
+
 export const backgroundReducer = (state = defaultState, action: AnyAction) :backgroundReducerType => {
     switch (action.type) {
+        case CREATE_DEFAULT_BACKGROUND:
+            return {...state, bgColor: action.newColor, width: action.width, height: action.height}
         case CHANGE_BACKGROUND:
             return {...state, bgColor: action.newColor}
         case CHANGE_WIDTH_CANVAS:

@@ -30,8 +30,13 @@ const Tools = () => {
         dispatch({type: "RENDER_DESC_SAVE", payload: true})
     }
 
+    const openDescNew = () => {
+        dispatch({type: "CLEAR_DESC"});
+        dispatch({type: "RENDER_DESC_NEW", payload: true})
+    }
+
     const buttons = [
-        { id: '1', title: 'Add File', nameImg: 'add-file', onClick: () => { } },
+        { id: '1', title: 'Add File', nameImg: 'add-file', onClick: openDescNew },
         { id: '2', title: 'Templates', nameImg: 'templates', onClick: () => { } },
         { id: '3', title: 'Add Background', nameImg: 'add-background', onClick: openDescBackground },
         { id: '4', title: 'Add Picture', nameImg: 'add-picture', onClick: openDescImg },
