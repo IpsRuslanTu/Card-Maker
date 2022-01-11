@@ -1,7 +1,8 @@
 import { connect, useSelector } from 'react-redux';
 import { createDefaultBG } from '../../store/backgroundReducer';
-import { clearImgState } from '../../store/insertImgReducer';
+import { clearImages } from '../../store/imgReducer';
 import { RootState } from '../../store/store';
+import { clearTexts } from '../../store/textReducer';
 import styles from './Desc.module.css'
 
 const DescNewCanvas = (props :DispatchProps) => {
@@ -11,7 +12,8 @@ const DescNewCanvas = (props :DispatchProps) => {
     const attention = () :void => {
         if (window.confirm('Delete Canvas? All your data will be lost')) {
             props.createDefaultBG();
-            props.clearImgState()
+            props.clearImages();
+            props.clearTexts();
         };
     }
     
@@ -27,7 +29,8 @@ type DispatchProps = ReturnType<typeof mapDispatchToProps>
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         createDefaultBG: () => dispatch(createDefaultBG()),
-        clearImgState: () => dispatch(clearImgState())
+        clearImages: () => dispatch(clearImages()),
+        clearTexts: () => dispatch(clearTexts())
     }
 }
 

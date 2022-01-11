@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { connect, useSelector } from 'react-redux'
-import { insertImg } from '../../store/insertImgReducer';
+import { insertImg } from '../../store/imgReducer';
 import { RootState } from '../../store/store'
 import style from './Desc.module.css'
 
@@ -30,8 +30,11 @@ const DescInsertPic = (props: DispatchProps) => {
         revokeImageUrl();
         if (inputRef.current && inputRef.current.files) {
             const image = inputRef.current.files[0];
-            selectedImageUrlRef.current = window.URL.createObjectURL(image);
-            props.insertImg(selectedImageUrlRef.current);
+            if (image) {
+                selectedImageUrlRef.current = window.URL.createObjectURL(image);
+                props.insertImg(selectedImageUrlRef.current);
+            }
+            setLoading(true);
         }
         setLoading(false)
     }

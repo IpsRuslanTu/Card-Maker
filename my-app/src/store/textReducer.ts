@@ -6,6 +6,7 @@ const CHANGE_FONT_SIZE = "CHANGE_FONT_SIZE";
 const CHANGE_FONT_COLOR = "CHANGE_FONT_COLOR";
 const CHANGE_FONT_FAMILY = "CHANGE_FONT_FAMILY";
 const CHANGE_FONT_WEIGHT = "CHANGE_FONT_WEIGHT";
+const CLEAR_TEXT_STATE = "CLEAR_TEXT_STATE";
 
 type InsertTextType = {
     arr: Array<TextType>,
@@ -25,6 +26,12 @@ const defaultState : InsertTextType = {
     fontColor: '#000000',
     fontFamily: 'Arial',
     fontSize: '20'
+}
+
+export function clearTexts(): AnyAction {
+    return {
+        type: CLEAR_TEXT_STATE,
+    }
 }
 
 export function insertText(): AnyAction {
@@ -78,6 +85,8 @@ export const ReducerText = (state = defaultState, action: AnyAction) : InsertTex
                         fontWeight: state.fontWeight
                     }),
             }
+        case CLEAR_TEXT_STATE:
+            return {...state, arr: []}
         case CHANGE_FONT_SIZE:
             return {...state, fontSize: action.newFontSize}
         case CHANGE_FONT_FAMILY:

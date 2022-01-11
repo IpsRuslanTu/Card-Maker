@@ -1,12 +1,20 @@
-import { connect } from 'react-redux'
+import React, { useRef } from 'react';
+import { connect, useDispatch } from 'react-redux'
+import { moveImg } from '../../store/imgReducer';
 import { RootState } from '../../store/store'
 
-const Images = (props: StateProps) => {
+const Images = (props: Props) => {
+
+    const imgBlock = useRef<HTMLImageElement>(null);
+    
     return ( 
         <>
         {
             (props.ReducerImg.arr.length > 0) ? 
                 props.ReducerImg.arr.map((item, index) => <img 
+                    ref={imgBlock}
+                    // onDragStart={(e) => e.preventDefault()}
+                    // onClick={() => props.moveImg(index)}
                     key={index}
                     alt=""
                     src={props.ReducerImg.arr[index].src}  
@@ -22,6 +30,8 @@ const Images = (props: StateProps) => {
 }
 
 type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = ReturnType<typeof mapDispatchToProps>
+type Props = StateProps & DispatchProps;
 
 function mapStateToProps(state: RootState) {
     return {
@@ -29,4 +39,10 @@ function mapStateToProps(state: RootState) {
     }
 }
 
-export default connect(mapStateToProps)(Images);
+const mapDispatchToProps = (dispatch: Function) => {
+    return {
+        moveImg: (index: number) => dispatch(moveImg(index)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Images);

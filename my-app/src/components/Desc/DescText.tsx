@@ -1,5 +1,5 @@
 import { connect, useSelector } from 'react-redux';
-import { getFontColor, getFontFamily, getFontSize, getFontWeight, insertText } from '../../store/insertTextReducer';
+import { getFontColor, getFontFamily, getFontSize, getFontWeight, insertText } from '../../store/textReducer';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
 import TextAtr from './TextAtr';
