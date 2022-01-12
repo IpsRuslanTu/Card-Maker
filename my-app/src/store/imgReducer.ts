@@ -19,7 +19,7 @@ export function insertImg(srcImg: string): AnyAction {
         type: INSERT_IMG,
         newSrc: srcImg,
         x: 100,
-        y: 200
+        y: 100
     }
 }
 

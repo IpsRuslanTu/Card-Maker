@@ -1,29 +1,21 @@
-import React, { useRef } from 'react';
 import { connect, useDispatch } from 'react-redux'
 import { moveImg } from '../../store/imgReducer';
 import { RootState } from '../../store/store'
+import Img from './Img';
 
 const Images = (props: Props) => {
-
-    const imgBlock = useRef<HTMLImageElement>(null);
     
     return ( 
         <>
         {
             (props.ReducerImg.arr.length > 0) ? 
-                props.ReducerImg.arr.map((item, index) => <img 
-                    ref={imgBlock}
-                    // onDragStart={(e) => e.preventDefault()}
-                    // onClick={() => props.moveImg(index)}
-                    key={index}
-                    alt=""
-                    src={props.ReducerImg.arr[index].src}  
-                    style={{
-                        position: "absolute",
-                        display: "block",
-                        left: props.ReducerImg.arr[index].x,
-                        top: props.ReducerImg.arr[index].y
-                    }}/>) : undefined
+                props.ReducerImg.arr.map((item, index) => <Img 
+                        key={index}
+                        index={index} 
+                        src={props.ReducerImg.arr[index].src}
+                        posX={props.ReducerImg.arr[index].x}
+                        posY={props.ReducerImg.arr[index].y}
+                    />) : undefined
         }
         </>
     )

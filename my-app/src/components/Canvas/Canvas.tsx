@@ -7,6 +7,7 @@ const Canvas = (props: StateProps) => {
 
     return (
         <div style={{
+            overflow: 'hidden',
             background: props.colorBG, 
             width: props.widthBG + 'px', 
             height: props.heightBG + 'px',
