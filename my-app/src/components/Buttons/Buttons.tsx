@@ -1,7 +1,7 @@
 import style from './Buttons.module.css';
 import { useDispatch } from 'react-redux';
 
-const Tools = () => {
+const Buttons = () => {
 
     const dispatch = useDispatch();
 
@@ -70,4 +70,4 @@ const Tools = () => {
     )
 }
 
-export default Tools;
+export default Buttons;

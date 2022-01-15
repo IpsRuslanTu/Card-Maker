@@ -23,7 +23,11 @@ export function useDragAndDrop(
         let newPos: positionType;
 
         function handleMouseDown(e: MouseEvent): void {
-            startPos = newPos = {
+            startPos = {
+                x: e.pageX,
+                y: e.pageY,
+            };
+            newPos = {
                 x: e.pageX,
                 y: e.pageY,
             };
@@ -37,10 +41,12 @@ export function useDragAndDrop(
                     x: e.pageX - startPos.x,
                     y: e.pageY - startPos.y
                 }
+                console.log(delta);
                 newPos = {
                     x: modelPos.x + delta.x,
                     y: modelPos.y + delta.y
                 }
+                console.log(newPos);
                 if (currentItem != null) currentItem.style.left = String(newPos.x) + 'px';
                 if (currentItem != null) currentItem.style.top = String(newPos.y) + 'px';
             }
@@ -48,7 +54,7 @@ export function useDragAndDrop(
 
         function handleMouseUp(): void {
             // if (newPos.y < 750 && newPos.y > 0) {
-                console.log(newPos);
+                // console.log(newPos);
                 setPosition(newPos);
                 document.removeEventListener("mousemove", handleMouseMove);
                 document.removeEventListener("mouseup", handleMouseUp);

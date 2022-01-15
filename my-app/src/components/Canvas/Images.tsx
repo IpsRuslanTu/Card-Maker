@@ -1,4 +1,4 @@
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { moveImg } from '../../store/imgReducer';
 import { RootState } from '../../store/store'
 import Img from './Img';
@@ -33,7 +33,7 @@ function mapStateToProps(state: RootState) {
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        moveImg: (index: number) => dispatch(moveImg(index)),
+        moveImg: (x: number, y: number) => dispatch(moveImg(x, y)),
     }
 }
 

@@ -1,12 +1,12 @@
 import style from './Workspace.module.css';
 import Easel from "../Easel/Easel";
 import Description from "../Description/Description";
-import Tools from "../Buttons/Buttons";
+import Buttons from "../Buttons/Buttons";
 
 const Workspace = () => {
     return (
         <div className={style.workspace}>
-            <Tools />
+            <Buttons />
             <Description/>
             <Easel/>
         </div>

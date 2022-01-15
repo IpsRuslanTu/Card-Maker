@@ -19,7 +19,7 @@ const DescNewCanvas = (props :DispatchProps) => {
     
     return (
         <div className={styles.desc} style={ visibleDescNew ? {display: "block"} : {display: "none"} }>
-            <button className={styles.button} onClick={attention}>DeleteCanvas?</button>
+            <button className={styles.button} onClick={attention}>Delete Canvas</button>
         </div>
     )
 }

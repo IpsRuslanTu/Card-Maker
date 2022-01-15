@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { TextType } from "./types";
 
 const INSERT_TEXT = "INSERT_TEXT";
+const CHANGE_TEXT = "CHANGE_TEXT";
 const CHANGE_FONT_SIZE = "CHANGE_FONT_SIZE";
 const CHANGE_FONT_COLOR = "CHANGE_FONT_COLOR";
 const CHANGE_FONT_FAMILY = "CHANGE_FONT_FAMILY";
@@ -18,7 +19,7 @@ type InsertTextType = {
     y: string,
 }
 
-const defaultState : InsertTextType = {
+const defaultState: InsertTextType = {
     arr: [],
     x: '200px',
     y: '200px',
@@ -41,60 +42,85 @@ export function insertText(): AnyAction {
     }
 }
 
-export function getFontSize(newFontSize: string) : AnyAction {
-    console.log(newFontSize);
+export function changeText(newString: string, id: number): AnyAction {
+    return {
+        indexArray: id,
+        type: CHANGE_TEXT,
+        text: newString,
+    }
+}
+
+export function getFontSize(newFontSize: string): AnyAction {
     return {
         type: CHANGE_FONT_SIZE,
         newFontSize: newFontSize
     }
 }
 
-export function getFontColor(newFontColor: string) : AnyAction {
+export function getFontColor(newFontColor: string): AnyAction {
     return {
         type: CHANGE_FONT_COLOR,
         newFontColor: newFontColor
     }
 }
 
-export function getFontFamily(newFontFamily: string) : AnyAction {
+export function getFontFamily(newFontFamily: string): AnyAction {
     return {
         type: CHANGE_FONT_FAMILY,
         newFontFamily: newFontFamily
     }
 }
 
-export function getFontWeight(newFontWeight: string) : AnyAction {
+export function getFontWeight(newFontWeight: string): AnyAction {
     return {
         type: CHANGE_FONT_WEIGHT,
         newFontWeight: newFontWeight
     }
 }
 
-export const ReducerText = (state = defaultState, action: AnyAction) : InsertTextType => {
+const newArr = (contentList: TextType[], id: number, str: string): TextType[] => {
+    const newContent: TextType[] = contentList;
+
+    newContent.forEach((item: TextType, index: number) => {
+
+        if (index === id) {
+            newContent[index].text = str;
+        }
+    })
+    return newContent;
+}
+
+export const ReducerText = (state = defaultState, action: AnyAction): InsertTextType => {
     switch (action.type) {
         case INSERT_TEXT:
             return {
-                ...state, 
-                    arr: state.arr.concat({
-                        x: '200px',
-                        y: '200px',
-                        text: action.text,
-                        fontFamily: state.fontFamily,
-                        fontSize: state.fontSize,
-                        fontColor: state.fontColor,
-                        fontWeight: state.fontWeight
-                    }),
+                ...state,
+                arr: state.arr.concat({
+                    x: '200px',
+                    y: '200px',
+                    text: action.text,
+                    fontFamily: state.fontFamily,
+                    fontSize: state.fontSize,
+                    fontColor: state.fontColor,
+                    fontWeight: state.fontWeight
+                }),
             }
+        case CHANGE_TEXT:
+            return {
+                ...state,
+                arr: newArr(state.arr, action.indexArray, action.text)
+            }
+
         case CLEAR_TEXT_STATE:
-            return {...state, arr: []}
+            return { ...state, arr: [] }
         case CHANGE_FONT_SIZE:
-            return {...state, fontSize: action.newFontSize}
+            return { ...state, fontSize: action.newFontSize }
         case CHANGE_FONT_FAMILY:
-            return {...state, fontFamily: action.newFontFamily}
+            return { ...state, fontFamily: action.newFontFamily }
         case CHANGE_FONT_WEIGHT:
-            return {...state, fontWeight: action.newFontWeight}
+            return { ...state, fontWeight: action.newFontWeight }
         case CHANGE_FONT_COLOR:
-            return { ...state, fontColor: action.newFontColor}
+            return { ...state, fontColor: action.newFontColor }
         default:
             return state
     }

@@ -4,7 +4,6 @@ import { ImageType } from "./types";
 const INSERT_IMG = "INSERT_IMG";
 const CLEAR_IMG_STATE = "CLEAR_IMG_STATE";
 const MOVE_IMG = "MOVE_IMG";
-const FIND_IMG = "FIND_IMG";
 
 type InsertImgType = {
     arr: Array<ImageType>
@@ -29,11 +28,11 @@ export function clearImages(): AnyAction {
     }
 }
 
-export function moveImg(index: number): AnyAction {
-    console.log(index);
+export function moveImg(x: number, y: number): AnyAction {
     return {
         type: MOVE_IMG,
-        index: index
+        x: x,
+        y: y
     }
 }
 
@@ -44,11 +43,6 @@ export const ReducerImg = (state = defaultState, action: AnyAction) : InsertImgT
                 ...state, 
                     arr: []
             }
-        // case MOVE_IMG:
-        //     return {
-        //         ...state, 
-        //             arr: []
-        //     }
         case INSERT_IMG:
             return {
                 ...state, 

@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDragAndDrop } from '../../customHooks/useDragAndDrop';
 
 const Img = (props: any) => {
