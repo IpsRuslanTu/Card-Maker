@@ -43,10 +43,7 @@ export function changeHeigthCanvas(newHeight: number): AnyAction {
 
 export function createDefaultBG(): AnyAction {
     return {
-        type: CREATE_DEFAULT_BACKGROUND,
-        newColor: '#cec7b4',
-        width: 700,
-        height: 450
+        type: CREATE_DEFAULT_BACKGROUND
     }
 }
 
@@ -60,7 +57,7 @@ export function addImgBG(newSrc :string): AnyAction {
 export const backgroundReducer = (state = defaultState, action: AnyAction) :backgroundReducerType => {
     switch (action.type) {
         case CREATE_DEFAULT_BACKGROUND:
-            return {...state, bgColor: action.newColor, width: action.width, height: action.height}
+            return {...state, bgColor: '#cec7b4', width: 700, height: 450, BGImage: null}
         case CHANGE_BACKGROUND:
             return {...state, bgColor: action.newColor}
         case ADD_IMAGE_BACKGROUND:

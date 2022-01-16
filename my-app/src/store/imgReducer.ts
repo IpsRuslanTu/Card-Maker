@@ -28,12 +28,26 @@ export function clearImages(): AnyAction {
     }
 }
 
-export function moveImg(x: number, y: number): AnyAction {
+export function moveImg(index: number, x: number, y: number): AnyAction {
     return {
         type: MOVE_IMG,
+        index: index,
         x: x,
         y: y
     }
+}
+
+const newArr = (contentList: ImageType[], id: number, x: number, y: number): ImageType[] => {
+    const newContent: ImageType[] = contentList;
+
+    newContent.forEach((item: ImageType, index: number) => {
+
+        if (index === id) {
+            newContent[index].x = x;
+            newContent[index].y = y;
+        }
+    })
+    return newContent;
 }
 
 export const ReducerImg = (state = defaultState, action: AnyAction) : InsertImgType => {
@@ -52,6 +66,11 @@ export const ReducerImg = (state = defaultState, action: AnyAction) : InsertImgT
                         y: action.y,
                         selected: false
                     })
+            }
+        case MOVE_IMG:
+            return {
+                ...state, 
+                    arr: newArr(state.arr, action.index, action.x, action.y)
             }
         default:
             return state

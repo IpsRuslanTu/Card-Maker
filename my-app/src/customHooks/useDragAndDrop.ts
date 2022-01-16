@@ -12,7 +12,8 @@ export interface positionType {
 export function useDragAndDrop(
     item: RefObject<HTMLElement>,
     modelPos: positionType,
-    setPosition: (position: positionType) => void
+    setPosition: (index: number, x: number, y: number) => void,
+    indexImg: number
 ): void {
 
     useEffect(() => {
@@ -20,14 +21,9 @@ export function useDragAndDrop(
         const currentItem = item.current;
 
         let startPos: positionType;
-        let newPos: positionType;
 
         function handleMouseDown(e: MouseEvent): void {
             startPos = {
-                x: e.pageX,
-                y: e.pageY,
-            };
-            newPos = {
                 x: e.pageX,
                 y: e.pageY,
             };
@@ -35,34 +31,36 @@ export function useDragAndDrop(
             document.addEventListener("mouseup", handleMouseUp);
         }
 
+        let newPos: positionType;
+
         function handleMouseMove(e: MouseEvent): void {
             if (!e.defaultPrevented) {
                 const delta = {
                     x: e.pageX - startPos.x,
                     y: e.pageY - startPos.y
                 }
-                console.log(delta);
                 newPos = {
                     x: modelPos.x + delta.x,
                     y: modelPos.y + delta.y
                 }
-                console.log(newPos);
+
                 if (currentItem != null) currentItem.style.left = String(newPos.x) + 'px';
                 if (currentItem != null) currentItem.style.top = String(newPos.y) + 'px';
             }
         }
 
         function handleMouseUp(): void {
-            // if (newPos.y < 750 && newPos.y > 0) {
-                // console.log(newPos);
-                setPosition(newPos);
-                document.removeEventListener("mousemove", handleMouseMove);
-                document.removeEventListener("mouseup", handleMouseUp);
-            // }
+            if (newPos) {
+                setPosition(indexImg, newPos.x, newPos.y);
+            }
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
         }
 
         if (currentItem != null)
             currentItem.addEventListener("mousedown", handleMouseDown);
+
+        
 
         return () => {
             if (currentItem) currentItem.removeEventListener("mousedown", handleMouseDown);

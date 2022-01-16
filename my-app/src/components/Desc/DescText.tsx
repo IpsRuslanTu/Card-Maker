@@ -17,7 +17,7 @@ const DescText = (props: DispatchProps) => {
 
             <TextAtr arr={fontSizes} getParam={getFontSize} title="Font size"/>
             <TextAtr arr={fontFamilies} getParam={getFontFamily} title="Font family"/>
-            <TextAtr arr={fontWeights} getParam={getFontWeight} title="Font style"/>
+            <TextAtr arr={fontWeights} getParam={getFontWeight} title="Font weight"/>
 
             <p className={styles.label}>Color text:</p>
             <input 

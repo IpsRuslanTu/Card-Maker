@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { changeText } from "../../store/textReducer";
 import { TextType } from "../../store/types";
@@ -8,7 +9,7 @@ interface TextComponentProps {
 }
 
 const TextComponent = (props: TextComponentProps & DispatchProps) => {
-    
+
     return (
         <input 
             onChange={(e) => props.changeText(e.target.value, props.index)}
