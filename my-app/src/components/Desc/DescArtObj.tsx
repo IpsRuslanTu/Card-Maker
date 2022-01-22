@@ -1,5 +1,5 @@
 import { connect, useSelector } from 'react-redux';
-import { insertCircle } from '../../store/figuresReducer';
+import { insertCircle, insertHeart, insertStar } from '../../store/figuresReducer';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
 
@@ -11,8 +11,8 @@ const DescArtObj = (props: Props) => {
         <div className={styles.desc} style={visibleDescArtObj ? {display: "block"} : {display: "none"}}>
             <p className={styles.title}>Choose art-object:</p>
             <button className={styles.button} onClick={props.insertCircle}>Circle</button>
-            <button className={styles.button}>Rectangle</button>
-            <button className={styles.button}>Triangle</button>
+            <button className={styles.button} onClick={props.insertHeart}>Heart</button>
+            <button className={styles.button} onClick={props.insertStar}>Star</button>
         </div>
     )
 }
@@ -29,7 +29,9 @@ function mapStateToProps(state: RootState) {
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        insertCircle: () => dispatch(insertCircle())
+        insertCircle: () => dispatch(insertCircle()),
+        insertHeart: () => dispatch(insertHeart()),
+        insertStar: () => dispatch(insertStar())
     }
 }
 

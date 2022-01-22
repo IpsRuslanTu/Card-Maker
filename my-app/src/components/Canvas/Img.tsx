@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { connect } from 'react-redux';
 import { positionType, useDragAndDrop } from '../../customHooks/useDragAndDrop';
-import { moveImg } from '../../store/imgReducer';
+import { deleteImage, moveImg } from '../../store/imgReducer';
 import { RootState } from '../../store/store';
 
 interface PropsType {
@@ -14,16 +14,31 @@ interface PropsType {
 
 const Img = (props: PropsType & Props) => {
 
+    const [borderStyle, setBorderStyle] = useState("none");
+    const changeStyle = () => {     
+        setBorderStyle("3px dashed black");
+    };
+
     const imgBlock = useRef<HTMLImageElement>(null);
-
     const pos: positionType = {x: props.posX, y: props.posY};
-
     useDragAndDrop(imgBlock, pos, props.moveImg, props.index);
+
+    const setKeyDown = (e: React.KeyboardEvent<Element>) => {
+        switch(e.code) {
+            case "Delete":
+                return props.deleteImage(props.index);
+            case 'Escape':
+                return setBorderStyle('none');
+        }
+    };
     
     return (
         <img 
             ref={imgBlock}
             onDragStart={(e) => e.preventDefault()}
+            onKeyDown={(e: React.KeyboardEvent) => setKeyDown(e)}
+            onClick={changeStyle}
+            tabIndex={0}
             // onMouseUp={() => props.moveImg(props.index, pos.x, pos.y)}
             key={props.index}
             alt=""
@@ -33,7 +48,8 @@ const Img = (props: PropsType & Props) => {
                 position: "absolute",
                 display: "block",
                 left: pos.x,
-                top: pos.y
+                top: pos.y,
+                border: borderStyle
             }}
         />
     )
@@ -52,6 +68,7 @@ function mapStateToProps(state: RootState) {
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         moveImg: (index: number, x: number, y: number) => dispatch(moveImg(index, x, y)),
+        deleteImage: (index: number) => dispatch(deleteImage(index))
     }
 }
 

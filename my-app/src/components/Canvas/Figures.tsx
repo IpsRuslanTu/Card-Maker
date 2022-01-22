@@ -1,23 +1,30 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../store/store'
+import Circle from './Circle'
+import Heart from './Heart'
+import Star from './Star'
 
 const Figures = (props: Props) => {
     return (
         <>
-        {
-            (props.figures.arr.length > 0) ? 
-                props.figures.arr.map((item, index) => <svg 
-                    width="750" height="500">
-                        <circle 
-                            cx={props.figures.arr[index].cx}
-                            cy={props.figures.arr[index].cy}
-                            r={props.figures.arr[index].radius}
-                            stroke="green" 
-                            stroke-width="4" 
-                            fill="yellow" />
-                    </svg>) : undefined
-        }
+            {
+                (props.figures.arr.length > 0) ?
+                    props.figures.arr.map((item, index) => {
+                        switch (item.name) {
+                            case 'circle':
+                                return <Circle key={index} 
+                                            // posX={props.figures.arr[index].x} 
+                                            // posY={props.figures.arr[index].y}
+                                            // width={props.figures.arr[index].width}
+                                        />
+                            case 'heart':
+                                return <Heart key={index} />
+                            case 'star':
+                                return <Star key={index} />
+                        }
+                    })
+                    : undefined
+            }
         </>
     )
 }

@@ -16,8 +16,8 @@ export type TextType = {
     // id: string
     width?: string
     height?: string
-    x: string
-    y: string
+    x: number
+    y: number
     text: string,
     fontWeight: string,
     fontSize: string

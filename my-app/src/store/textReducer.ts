@@ -3,6 +3,7 @@ import { TextType } from "./types";
 
 const INSERT_TEXT = "INSERT_TEXT";
 const CHANGE_TEXT = "CHANGE_TEXT";
+const MOVE_TEXT = "MOVE_TEXT";
 const CHANGE_FONT_SIZE = "CHANGE_FONT_SIZE";
 const CHANGE_FONT_COLOR = "CHANGE_FONT_COLOR";
 const CHANGE_FONT_FAMILY = "CHANGE_FONT_FAMILY";
@@ -15,14 +16,14 @@ type InsertTextType = {
     fontSize: string,
     fontFamily: string,
     fontWeight: string,
-    x: string,
-    y: string,
+    x: number,
+    y: number,
 }
 
 const defaultState: InsertTextType = {
     arr: [],
-    x: '200px',
-    y: '200px',
+    x: 200,
+    y: 200,
     fontWeight: '400',
     fontColor: '#000000',
     fontFamily: 'Arial',
@@ -39,6 +40,8 @@ export function insertText(): AnyAction {
     return {
         type: INSERT_TEXT,
         text: 'Input Text',
+        x: 200,
+        y: 200
     }
 }
 
@@ -78,7 +81,16 @@ export function getFontWeight(newFontWeight: string): AnyAction {
     }
 }
 
-const newArr = (contentList: TextType[], id: number, str: string): TextType[] => {
+export function moveText(index: number, x: number, y: number): AnyAction {
+    return {
+        type: MOVE_TEXT,
+        index: index,
+        x: x,
+        y: y
+    }
+}
+
+const newArrAfterChangeInput = (contentList: TextType[], id: number, str: string): TextType[] => {
     const newContent: TextType[] = contentList;
 
     newContent.forEach((item: TextType, index: number) => {
@@ -90,14 +102,26 @@ const newArr = (contentList: TextType[], id: number, str: string): TextType[] =>
     return newContent;
 }
 
+const newArrAfterChangePosition = (contentList: TextType[], id: number, x: number, y: number): TextType[] => {
+    const newContent: TextType[] = contentList;
+
+    newContent.forEach((item: TextType, index: number) => {
+        if (index === id) {
+            newContent[index].x = x;
+            newContent[index].y = y;
+        }
+    })
+    return newContent;
+}
+
 export const ReducerText = (state = defaultState, action: AnyAction): InsertTextType => {
     switch (action.type) {
         case INSERT_TEXT:
             return {
                 ...state,
                 arr: state.arr.concat({
-                    x: '200px',
-                    y: '200px',
+                    x: action.x,
+                    y: action.y,
                     text: action.text,
                     fontFamily: state.fontFamily,
                     fontSize: state.fontSize,
@@ -108,9 +132,13 @@ export const ReducerText = (state = defaultState, action: AnyAction): InsertText
         case CHANGE_TEXT:
             return {
                 ...state,
-                arr: newArr(state.arr, action.indexArray, action.text)
+                arr: newArrAfterChangeInput(state.arr, action.indexArray, action.text)
             }
-
+        case MOVE_TEXT:
+            return {
+                ...state, 
+                    arr: newArrAfterChangePosition(state.arr, action.index, action.x, action.y)
+            }
         case CLEAR_TEXT_STATE:
             return { ...state, arr: [] }
         case CHANGE_FONT_SIZE:

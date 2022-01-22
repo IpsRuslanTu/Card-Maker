@@ -4,12 +4,13 @@ import { ImageType } from "./types";
 const INSERT_IMG = "INSERT_IMG";
 const CLEAR_IMG_STATE = "CLEAR_IMG_STATE";
 const MOVE_IMG = "MOVE_IMG";
+const DELETE_IMAGE = "DELETE_IMAGE";
 
 type InsertImgType = {
     arr: Array<ImageType>
 }
 
-const defaultState : InsertImgType = {
+const defaultState: InsertImgType = {
     arr: []
 }
 
@@ -25,6 +26,13 @@ export function insertImg(srcImg: string): AnyAction {
 export function clearImages(): AnyAction {
     return {
         type: CLEAR_IMG_STATE,
+    }
+}
+
+export function deleteImage(index: number): AnyAction {
+    return {
+        type: DELETE_IMAGE,
+        index: index
     }
 }
 
@@ -50,27 +58,32 @@ const newArr = (contentList: ImageType[], id: number, x: number, y: number): Ima
     return newContent;
 }
 
-export const ReducerImg = (state = defaultState, action: AnyAction) : InsertImgType => {
+export const ReducerImg = (state = defaultState, action: AnyAction): InsertImgType => {
     switch (action.type) {
         case CLEAR_IMG_STATE:
             return {
-                ...state, 
-                    arr: []
+                ...state,
+                arr: []
+            }
+        case DELETE_IMAGE:
+            return {
+                ...state,
+                arr: state.arr.filter((eachElem, index) => action.index !== index)
             }
         case INSERT_IMG:
             return {
-                ...state, 
-                    arr: state.arr.concat({
-                        src: action.newSrc,
-                        x: action.x, 
-                        y: action.y,
-                        selected: false
-                    })
+                ...state,
+                arr: state.arr.concat({
+                    src: action.newSrc,
+                    x: action.x,
+                    y: action.y,
+                    selected: false
+                })
             }
         case MOVE_IMG:
             return {
-                ...state, 
-                    arr: newArr(state.arr, action.index, action.x, action.y)
+                ...state,
+                arr: newArr(state.arr, action.index, action.x, action.y)
             }
         default:
             return state

@@ -11,6 +11,8 @@ const Texts = (props: StateProps) => {
                         key={index}
                         index={index}
                         text={props.ReducerText.arr[index]} 
+                        posX={props.ReducerText.arr[index].x}
+                        posY={props.ReducerText.arr[index].y}
                     /> ) : undefined
         }
         </>
