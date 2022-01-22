@@ -1,19 +1,50 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
 
-const DescSave = () => {
+const DescSave = (props: Props) => {
 
     const visibleDescSave = useSelector((state: RootState) => state.buttonsReducer.visibleDescSave);
+
+    async function downloadFile()  {
+        const fileName = "file";
+        const json = JSON.stringify(props.newProject);
+        const blob = new Blob([json],{type:'application/json'});
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = href;
+        link.download = fileName + ".json";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
 
     return (
         <div className={styles.desc} style={visibleDescSave ? {display: "block"} : {display: "none"}}>
             <p className={styles.title}>Choose format:</p>
-            <button className={styles.button}>PNG</button>
-            <button className={styles.button}>JPEG</button>
+            <button className={styles.button} onClick={downloadFile} >Save to JSON</button>
         </div>
     )
 }
 
-export default DescSave
+type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = ReturnType<typeof mapDispatchToProps>
+type Props = StateProps & DispatchProps;
+
+function mapStateToProps(state: RootState) {
+    return {
+        newProject: {
+            images: state.ReducerImg,
+            texts: state.ReducerText.arr,
+            figures: state.figuresReducer,
+            backgound: state.backgroundReducer
+        }
+    }
+}
+
+const mapDispatchToProps = (dispatch: Function) => {
+    return {
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DescSave);
