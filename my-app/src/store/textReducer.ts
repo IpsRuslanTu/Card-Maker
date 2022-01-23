@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { TextType } from "./types";
+import { Point, TextType } from "./types";
 
 const INSERT_TEXT = "INSERT_TEXT";
 const CHANGE_TEXT = "CHANGE_TEXT";
@@ -16,9 +16,7 @@ type InsertTextType = {
     fontSize: string,
     fontFamily: string,
     fontWeight: string,
-    x: number,
-    y: number,
-}
+} & Point
 
 const defaultState: InsertTextType = {
     arr: [],

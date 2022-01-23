@@ -1,0 +1,33 @@
+.corner {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #4286f4;
+    position: absolute;
+    z-index: 5;
+}
+
+.leftTopCorner {
+    top: -9px;
+    left: -9px;
+    cursor: nwse-resize;
+}
+
+.rightTopCorner {
+    top: -9px;
+    right: -9px;
+    cursor: nesw-resize;
+}
+
+.leftBottomCorner {
+    bottom: -9px;
+    left: -9px;
+    cursor: nesw-resize;
+}
+
+.rightBottomCorner {
+    bottom: -9px;
+    right: -9px;
+    cursor: nwse-resize;
+}

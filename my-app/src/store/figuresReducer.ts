@@ -1,29 +1,19 @@
-interface CircleAction {
+import { Point, SizeType } from "./types";
+
+type CircleAction = {
     type: FiguresActionType.INSERT_CIRCLE;
     name: string;
-    width: number;
-    height: number;
-    x: number;
-    y: number
-}
+} & Point & SizeType
 
-interface HeartAction {
+type HeartAction = {
     type: FiguresActionType.INSERT_HEART;
     name: string;
-    width: number;
-    height: number;
-    x: number;
-    y: number
-}
+} & Point & SizeType
 
-interface StarAction {
+type StarAction = {
     type: FiguresActionType.INSERT_STAR;
     name: string;
-    width: number;
-    height: number;
-    x: number;
-    y: number
-}
+} & Point & SizeType
 
 enum FiguresActionType {
     INSERT_CIRCLE = "INSERT_CIRCLE",
@@ -35,15 +25,11 @@ type FiguresAction = CircleAction | HeartAction | StarAction;
 
 type FigureType = {
     name: string,
-    x: number,
-    y: number,
-    width: number,
-    height: number
-}
+} & Point & SizeType
 
 interface InsertFiguresType {
     arr: Array<FigureType>
-}
+} 
 
 const defaultState: InsertFiguresType = {
     arr: []

@@ -1,39 +1,38 @@
+export type Point = {
+    x: number;
+    y: number
+}
+
+export type SizeType = {
+    width: number;
+    height: number
+}
+
 export type ContentType = ImageType | TextType | ArtObjType;
 
 export type ImageType = {
-    // kind: 'image'
     src: string
-    // id: string
-    width?: string
-    height?: string
-    x: number
-    y: number
+    width: number
+    height: number
     selected: boolean
-}
+} & Point
 
 export type TextType = {
-    // kind: 'text'
-    // id: string
     width?: string
     height?: string
-    x: number
-    y: number
     text: string,
     fontWeight: string,
     fontSize: string
     fontColor: string
     fontFamily: string
-}
+} & Point
 
 export type ArtObjType = {
-    // kind: 'artobj'
     id: string
     width?: string
     height?: string
-    x: number
-    y: number
     figure: FigureType
-}
+} & Point
 
 export enum FigureType {
     circle, rect, triangle

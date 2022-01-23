@@ -27,12 +27,18 @@ const DescInsertPic = (props: DispatchProps) => {
     }
 
     function updateSelectedImage() {
+
         revokeImageUrl();
         if (inputRef.current && inputRef.current.files) {
             const image = inputRef.current.files[0];
             if (image) {
                 selectedImageUrlRef.current = window.URL.createObjectURL(image);
-                props.insertImg(selectedImageUrlRef.current);
+
+                let imageWWW = new Image();
+                imageWWW.src = selectedImageUrlRef.current;
+                imageWWW.onload = function() {
+                    props.insertImg(window.URL.createObjectURL(image), imageWWW.width, imageWWW.height);
+                }
             }
             setLoading(true);
         }
@@ -70,7 +76,7 @@ type DispatchProps = ReturnType<typeof mapDispatchToProps>
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        insertImg: (newSrc: string) => dispatch(insertImg(newSrc)),
+        insertImg: (newSrc: string, width: number, height: number) => dispatch(insertImg(newSrc, width, height)),
     }
 }
 

@@ -5,6 +5,7 @@ const INSERT_IMG = "INSERT_IMG";
 const CLEAR_IMG_STATE = "CLEAR_IMG_STATE";
 const MOVE_IMG = "MOVE_IMG";
 const DELETE_IMAGE = "DELETE_IMAGE";
+const RESIZE_IMAGE = "RESIZE_IMAGE";
 
 type InsertImgType = {
     arr: Array<ImageType>
@@ -14,12 +15,14 @@ const defaultState: InsertImgType = {
     arr: []
 }
 
-export function insertImg(srcImg: string): AnyAction {
+export function insertImg(srcImg: string, width: number, height: number): AnyAction {
     return {
         type: INSERT_IMG,
         newSrc: srcImg,
         x: 100,
-        y: 100
+        y: 100,
+        width: width,
+        height: height
     }
 }
 
@@ -45,7 +48,16 @@ export function moveImg(index: number, x: number, y: number): AnyAction {
     }
 }
 
-const newArr = (contentList: ImageType[], id: number, x: number, y: number): ImageType[] => {
+export function resizeImg(index: number, width: number, height: number): AnyAction {
+    return {
+        type: MOVE_IMG,
+        index: index,
+        width: width,
+        height: height,
+    }
+}
+
+const newArrImages = (contentList: ImageType[], id: number, x: number, y: number): ImageType[] => {
     const newContent: ImageType[] = contentList;
 
     newContent.forEach((item: ImageType, index: number) => {
@@ -53,6 +65,18 @@ const newArr = (contentList: ImageType[], id: number, x: number, y: number): Ima
         if (index === id) {
             newContent[index].x = x;
             newContent[index].y = y;
+        }
+    })
+    return newContent;
+}
+
+const newArrImages2 = (contentList: ImageType[], id: number, width: number, height: number): ImageType[] => {
+    const newContent: ImageType[] = contentList;
+
+    newContent.forEach((item: ImageType, index: number) => {
+        if (index === id) {
+            newContent[index].width = width;
+            newContent[index].height = height;
         }
     })
     return newContent;
@@ -77,13 +101,20 @@ export const ReducerImg = (state = defaultState, action: AnyAction): InsertImgTy
                     src: action.newSrc,
                     x: action.x,
                     y: action.y,
+                    width: action.width,
+                    height: action.height,
                     selected: false
                 })
             }
         case MOVE_IMG:
             return {
                 ...state,
-                arr: newArr(state.arr, action.index, action.x, action.y)
+                arr: newArrImages(state.arr, action.index, action.x, action.y)
+            }
+        case RESIZE_IMAGE:
+            return {
+                ...state,
+                arr: newArrImages2(state.arr, action.index, action.width, action.height)
             }
         default:
             return state

@@ -14,6 +14,8 @@ const Images = (props: StateProps) => {
                         src={props.ReducerImg.arr[index].src}
                         posX={props.ReducerImg.arr[index].x}
                         posY={props.ReducerImg.arr[index].y}
+                        widthImg={props.ReducerImg.arr[index].width}
+                        heightImg={props.ReducerImg.arr[index].height}
                     />) : undefined
         }
         </>

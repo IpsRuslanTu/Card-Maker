@@ -1,4 +1,5 @@
 import { AnyAction } from "redux";
+import { SizeType } from "./types";
 
 const CREATE_DEFAULT_BACKGROUND = "CREATE_DEFAULT_BACKGROUND";
 const CHANGE_BACKGROUND = "CHANGE_BACKGROUND";
@@ -8,10 +9,8 @@ const ADD_IMAGE_BACKGROUND = "ADD_IMAGE_BACKGROUND";
 
 type backgroundReducerType = {
     bgColor: string,
-    width: number,
-    height: number,
     BGImage: string | null
-}
+} & SizeType
 
 const defaultState: backgroundReducerType = {
     bgColor: '#cec7b4',
