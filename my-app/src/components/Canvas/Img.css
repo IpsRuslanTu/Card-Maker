@@ -30,4 +30,5 @@
     bottom: -9px;
     right: -9px;
     cursor: nwse-resize;
+    z-index: 5;
 }

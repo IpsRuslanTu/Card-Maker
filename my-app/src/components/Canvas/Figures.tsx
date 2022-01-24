@@ -13,8 +13,9 @@ const Figures = (props: Props) => {
                         switch (item.name) {
                             case 'circle':
                                 return <Circle key={index} 
-                                            // posX={props.figures.arr[index].x} 
-                                            // posY={props.figures.arr[index].y}
+                                            posX={props.figures.arr[index].x} 
+                                            posY={props.figures.arr[index].y}
+                                            index={index}
                                             // width={props.figures.arr[index].width}
                                         />
                             case 'heart':

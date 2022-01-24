@@ -1,4 +1,5 @@
 import { Point, SizeType } from "./types";
+import { AnyAction } from "redux";
 
 type CircleAction = {
     type: FiguresActionType.INSERT_CIRCLE;
@@ -18,7 +19,9 @@ type StarAction = {
 enum FiguresActionType {
     INSERT_CIRCLE = "INSERT_CIRCLE",
     INSERT_HEART = "INSERT_HEART",
-    INSERT_STAR = "INSERT_STAR"
+    INSERT_STAR = "INSERT_STAR",
+    CLEAR_SVG_STATE = "CLEAR_SVG_STATE",
+    MOVE_SVG = "MOVE_SVG"
 }
 
 type FiguresAction = CircleAction | HeartAction | StarAction;
@@ -29,7 +32,7 @@ type FigureType = {
 
 interface InsertFiguresType {
     arr: Array<FigureType>
-} 
+}
 
 const defaultState: InsertFiguresType = {
     arr: []
@@ -41,8 +44,8 @@ export function insertCircle(): CircleAction {
         name: 'circle',
         width: 200,
         height: 100,
-        x: 450,
-        y: 150
+        x: 50,
+        y: 50
     }
 }
 
@@ -68,7 +71,35 @@ export function insertStar(): StarAction {
     }
 }
 
-export const figuresReducer = (state = defaultState, action: FiguresAction): InsertFiguresType => {
+export function clearSvg(): AnyAction {
+    return {
+        type: FiguresActionType.CLEAR_SVG_STATE,
+    }
+}
+
+export function moveSvg(index: number, x: number, y: number): AnyAction {
+    return {
+        type: FiguresActionType.MOVE_SVG,
+        index: index,
+        x: x,
+        y: y
+    }
+}
+
+const newArrSvg = (contentList: FigureType[], id: number, x: number, y: number): FigureType[] => {
+    const newContent: FigureType[] = contentList;
+
+    newContent.forEach((item: FigureType, index: number) => {
+
+        if (index === id) {
+            newContent[index].x = x;
+            newContent[index].y = y;
+        }
+    })
+    return newContent;
+}
+
+export const figuresReducer = (state = defaultState, action: AnyAction): InsertFiguresType => {
     switch (action.type) {
         case FiguresActionType.INSERT_CIRCLE:
             return {
@@ -102,6 +133,16 @@ export const figuresReducer = (state = defaultState, action: FiguresAction): Ins
                     x: action.x,
                     y: action.y
                 })
+            }
+        case FiguresActionType.CLEAR_SVG_STATE:
+            return {
+                ...state,
+                arr: []
+            }
+        case FiguresActionType.MOVE_SVG:
+            return {
+                ...state,
+                arr: newArrSvg(state.arr, action.index, action.x, action.y)
             }
         default:
             return state

@@ -1,5 +1,6 @@
 import { connect, useSelector } from 'react-redux';
 import { createDefaultBG } from '../../store/backgroundReducer';
+import { clearSvg } from '../../store/figuresReducer';
 import { clearImages } from '../../store/imgReducer';
 import { RootState } from '../../store/store';
 import { clearTexts } from '../../store/textReducer';
@@ -14,6 +15,7 @@ const DescNewCanvas = (props :DispatchProps) => {
             props.createDefaultBG();
             props.clearImages();
             props.clearTexts();
+            props.clearCvg();
         };
     }
     
@@ -30,7 +32,8 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         createDefaultBG: () => dispatch(createDefaultBG()),
         clearImages: () => dispatch(clearImages()),
-        clearTexts: () => dispatch(clearTexts())
+        clearTexts: () => dispatch(clearTexts()),
+        clearCvg: () => dispatch(clearSvg())
     }
 }
 

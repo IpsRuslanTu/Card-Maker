@@ -50,7 +50,7 @@ export function moveImg(index: number, x: number, y: number): AnyAction {
 
 export function resizeImg(index: number, width: number, height: number): AnyAction {
     return {
-        type: MOVE_IMG,
+        type: RESIZE_IMAGE,
         index: index,
         width: width,
         height: height,
@@ -72,7 +72,7 @@ const newArrImages = (contentList: ImageType[], id: number, x: number, y: number
 
 const newArrImages2 = (contentList: ImageType[], id: number, width: number, height: number): ImageType[] => {
     const newContent: ImageType[] = contentList;
-
+    console.log(width);
     newContent.forEach((item: ImageType, index: number) => {
         if (index === id) {
             newContent[index].width = width;

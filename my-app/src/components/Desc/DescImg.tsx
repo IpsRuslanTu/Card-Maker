@@ -34,11 +34,20 @@ const DescInsertPic = (props: DispatchProps) => {
             if (image) {
                 selectedImageUrlRef.current = window.URL.createObjectURL(image);
 
+                let reader = new FileReader();
+                reader.readAsDataURL(image);
+
                 let imageWWW = new Image();
                 imageWWW.src = selectedImageUrlRef.current;
-                imageWWW.onload = function() {
-                    props.insertImg(window.URL.createObjectURL(image), imageWWW.width, imageWWW.height);
+
+                reader.onload = function() {
+                    let readerResult = String(reader.result);
+                    imageWWW.onload = function() {
+                        props.insertImg(readerResult, imageWWW.width, imageWWW.height);
+                    }
                 }
+
+
             }
             setLoading(true);
         }

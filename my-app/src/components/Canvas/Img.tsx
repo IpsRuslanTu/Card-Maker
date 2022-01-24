@@ -23,6 +23,7 @@ const Img = (props: PropsType & Props) => {
     const pointRightTop = useRef<HTMLDivElement>(null);
     const pointLeftBottom = useRef<HTMLDivElement>(null);
     const pointRightBottom = useRef<HTMLDivElement>(null);
+
     const imgBlock = useRef<HTMLImageElement>(null);
     const pos: positionType = {x: props.posX, y: props.posY};
 
@@ -31,7 +32,25 @@ const Img = (props: PropsType & Props) => {
         setBorderStyle("3px dashed black");
     };
 
-    
+    const modelSize = {
+        width: props.widthImg,
+        height: props.heightImg
+    }
+
+    useResize(
+        props.resizeImg,
+        props.moveImg,
+        imgBlock,
+        pointLeftTop,
+        pointRightTop,
+        pointLeftBottom,
+        pointRightBottom,
+        imgResize,
+        pos,
+        modelSize,
+        props.index
+    );
+
     useDragAndDrop(imgBlock, pos, props.moveImg, props.index);
 
     const setKeyDown = (e: React.KeyboardEvent<Element>) => {
