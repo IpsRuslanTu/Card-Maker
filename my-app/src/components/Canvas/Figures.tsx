@@ -5,6 +5,7 @@ import Heart from './Heart'
 import Star from './Star'
 
 const Figures = (props: Props) => {
+    
     return (
         <>
             {
@@ -12,16 +13,22 @@ const Figures = (props: Props) => {
                     props.figures.arr.map((item, index) => {
                         switch (item.name) {
                             case 'circle':
-                                return <Circle key={index} 
-                                            posX={props.figures.arr[index].x} 
-                                            posY={props.figures.arr[index].y}
-                                            index={index}
-                                            // width={props.figures.arr[index].width}
-                                        />
+                                return <Circle key={index}
+                                    posX={props.figures.arr[index].x}
+                                    posY={props.figures.arr[index].y}
+                                    index={index}
+                                // width={props.figures.arr[index].width}
+                                />
                             case 'heart':
-                                return <Heart key={index} />
+                                return <Heart key={index}
+                                    posX={props.figures.arr[index].x}
+                                    posY={props.figures.arr[index].y}
+                                    index={index} />
                             case 'star':
-                                return <Star key={index} />
+                                return <Star key={index}
+                                    posX={props.figures.arr[index].x}
+                                    posY={props.figures.arr[index].y}
+                                    index={index} />
                         }
                     })
                     : undefined

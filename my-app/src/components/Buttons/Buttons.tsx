@@ -35,9 +35,14 @@ const Buttons = () => {
         dispatch({type: "RENDER_DESC_NEW", payload: true})
     }
 
+    const openTemplates = () => {
+        dispatch({type: "CLEAR_DESC"});
+        dispatch({type: "RENDER_DESC_TEMPLATES", payload: true})
+    }
+
     const buttons = [
         { id: '1', title: 'Add File', nameImg: 'add-file', onClick: openDescNew },
-        { id: '2', title: 'Templates', nameImg: 'templates', onClick: () => { } },
+        { id: '2', title: 'Templates', nameImg: 'templates', onClick: openTemplates },
         { id: '3', title: 'Add Background', nameImg: 'add-background', onClick: openDescBackground },
         { id: '4', title: 'Add Picture', nameImg: 'add-picture', onClick: openDescImg },
         { id: '5', title: 'Add Art-object', nameImg: 'add-artobj', onClick: openDescArtObj },

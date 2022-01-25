@@ -1,5 +1,6 @@
 type buttonsReducerType = {
     visibleDescGreetings: boolean,
+    visibleDescTemplates: boolean,
     visibleDescNew: boolean,
     visibleDescArtObj: boolean,
     visibleDescBackground: boolean,
@@ -15,6 +16,7 @@ type buttonsAction = {
 
 const defaultState: buttonsReducerType = {
     visibleDescGreetings: true,
+    visibleDescTemplates: false,
     visibleDescNew: false,
     visibleDescArtObj: false,
     visibleDescBackground: false,
@@ -23,12 +25,14 @@ const defaultState: buttonsReducerType = {
     visibleDescText: false
 }
 
-export const buttonsReducer = (state = defaultState, action: buttonsAction) :buttonsReducerType => {
+export const buttonsReducer = (state = defaultState, action: buttonsAction): buttonsReducerType => {
     switch (action.type) {
         case "CLEAR_DESC":
-            return {...state, 
+            return {
+                ...state,
                 visibleDescNew: false,
-                visibleDescGreetings: false, 
+                visibleDescTemplates: false,
+                visibleDescGreetings: false,
                 visibleDescArtObj: false,
                 visibleDescBackground: false,
                 visibleDescInsertPic: false,
@@ -36,17 +40,19 @@ export const buttonsReducer = (state = defaultState, action: buttonsAction) :but
                 visibleDescText: false
             }
         case "RENDER_DESC_NEW":
-            return {...state, visibleDescNew: action.payload}
+            return { ...state, visibleDescNew: action.payload }
         case "RENDER_DESC_ARTOBJ":
-            return {...state, visibleDescArtObj: action.payload}
+            return { ...state, visibleDescArtObj: action.payload }
         case "RENDER_DESC_BACKGROUND":
-            return {...state, visibleDescBackground: action.payload}
+            return { ...state, visibleDescBackground: action.payload }
         case "RENDER_DESC_INSERT_PIC":
-            return {...state, visibleDescInsertPic: action.payload}
+            return { ...state, visibleDescInsertPic: action.payload }
         case "RENDER_DESC_SAVE":
-            return {...state, visibleDescSave: action.payload}
+            return { ...state, visibleDescSave: action.payload }
         case "RENDER_DESC_TEXT":
-            return {...state, visibleDescText: action.payload}
+            return { ...state, visibleDescText: action.payload }
+        case "RENDER_DESC_TEMPLATES":
+            return { ...state, visibleDescTemplates: action.payload }
         default:
             return state
     }

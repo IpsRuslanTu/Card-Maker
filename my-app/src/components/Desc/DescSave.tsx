@@ -37,7 +37,7 @@ function mapStateToProps(state: RootState) {
             images: state.ReducerImg,
             texts: state.ReducerText.arr,
             figures: state.figuresReducer,
-            backgound: state.backgroundReducer
+            background: state.backgroundReducer
         }
     }
 }

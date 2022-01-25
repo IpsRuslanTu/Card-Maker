@@ -9,6 +9,8 @@ const CHANGE_FONT_COLOR = "CHANGE_FONT_COLOR";
 const CHANGE_FONT_FAMILY = "CHANGE_FONT_FAMILY";
 const CHANGE_FONT_WEIGHT = "CHANGE_FONT_WEIGHT";
 const CLEAR_TEXT_STATE = "CLEAR_TEXT_STATE";
+const NEW_TEXT_ARR = "NEW_TEXT_ARR";
+const DELETE_TEXT = "DELETE_TEXT";
 
 type InsertTextType = {
     arr: Array<TextType>,
@@ -88,6 +90,20 @@ export function moveText(index: number, x: number, y: number): AnyAction {
     }
 }
 
+export function deleteTextBlock(index: number): AnyAction {
+    return {
+        type: DELETE_TEXT,
+        index: index
+    }
+}
+
+export function pushNewTextArrToReducer(newArr: any): AnyAction {
+    return {
+        type: "NEW_TEXT_ARR",
+        newArr: newArr
+    }
+}
+
 const newArrAfterChangeInput = (contentList: TextType[], id: number, str: string): TextType[] => {
     const newContent: TextType[] = contentList;
 
@@ -134,8 +150,8 @@ export const ReducerText = (state = defaultState, action: AnyAction): InsertText
             }
         case MOVE_TEXT:
             return {
-                ...state, 
-                    arr: newArrAfterChangePosition(state.arr, action.index, action.x, action.y)
+                ...state,
+                arr: newArrAfterChangePosition(state.arr, action.index, action.x, action.y)
             }
         case CLEAR_TEXT_STATE:
             return { ...state, arr: [] }
@@ -147,6 +163,13 @@ export const ReducerText = (state = defaultState, action: AnyAction): InsertText
             return { ...state, fontWeight: action.newFontWeight }
         case CHANGE_FONT_COLOR:
             return { ...state, fontColor: action.newFontColor }
+        case NEW_TEXT_ARR:
+            return { ...state, arr: action.newArr }
+        case DELETE_TEXT:
+            return {
+                ...state,
+                arr: state.arr.filter((eachElem, index) => action.index !== index)
+            }
         default:
             return state
     }

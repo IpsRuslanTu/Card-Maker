@@ -1,5 +1,5 @@
 export const fontFamilies = ['Arial', 'Times New Roman', 'Calibri', 'Georgia', 'Courier New', 
-    'Impact',  'Futura',  'Algerian', 'Castellar']
+    'Forte',  'Broadway',  'Algerian', 'Castellar']
 
 export const fontSizes = Array<string>();
 export const fontWeights = Array<string>();

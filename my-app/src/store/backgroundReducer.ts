@@ -6,6 +6,7 @@ const CHANGE_BACKGROUND = "CHANGE_BACKGROUND";
 const CHANGE_WIDTH_CANVAS = "CHANGE_WIDTH_CANVAS";
 const CHANGE_HEIGTH_CANVAS = "CHANGE_HEIGTH_CANVAS";
 const ADD_IMAGE_BACKGROUND = "ADD_IMAGE_BACKGROUND";
+const CUSTOM_BACKGROUND = "CUSTOM_BACKGROUND";
 
 type backgroundReducerType = {
     bgColor: string,
@@ -46,25 +47,39 @@ export function createDefaultBG(): AnyAction {
     }
 }
 
-export function addImgBG(newSrc :string): AnyAction {
+export function addImgBG(newSrc: string): AnyAction {
     return {
         type: ADD_IMAGE_BACKGROUND,
         newSrc: newSrc
     }
 }
 
-export const backgroundReducer = (state = defaultState, action: AnyAction) :backgroundReducerType => {
+export function newBackgroundToReducer(newBG: any): AnyAction {
+    return {
+        type: CUSTOM_BACKGROUND,
+        newBG: newBG
+    }
+}
+
+export const backgroundReducer = (state = defaultState, action: AnyAction): backgroundReducerType => {
     switch (action.type) {
         case CREATE_DEFAULT_BACKGROUND:
-            return {...state, bgColor: '#cec7b4', width: 700, height: 450, BGImage: null}
+            return { ...state, bgColor: '#cec7b4', width: 700, height: 450, BGImage: null }
         case CHANGE_BACKGROUND:
-            return {...state, bgColor: action.newColor}
+            return { ...state, bgColor: action.newColor }
         case ADD_IMAGE_BACKGROUND:
-            return {...state, BGImage: action.newSrc}
+            return { ...state, BGImage: action.newSrc }
         case CHANGE_WIDTH_CANVAS:
-            return {...state, width: action.width}
+            return { ...state, width: action.width }
         case CHANGE_HEIGTH_CANVAS:
-            return {...state, height: action.height}
+            return { ...state, height: action.height }
+        case CUSTOM_BACKGROUND:
+            return { ...state, 
+                bgColor: action.newBG.bgColor, 
+                width: action.newBG.width, 
+                height: action.newBG.height, 
+                BGImage: action.newBG.BGImage,  
+            }
         default:
             return state
     }

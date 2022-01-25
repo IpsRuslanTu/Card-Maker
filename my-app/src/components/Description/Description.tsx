@@ -4,6 +4,7 @@ import DescGreetings from '../Desc/DescGreetings';
 import DescInsertPic from '../Desc/DescImg';
 import DescNewCanvas from '../Desc/DescNewCanvas';
 import DescSave from '../Desc/DescSave';
+import DescTemplates from '../Desc/DescTemplates';
 import DescText from '../Desc/DescText';
 import style from './Description.module.css';
 
@@ -17,6 +18,7 @@ const Description = () => {
             <DescInsertPic />
             <DescSave />
             <DescNewCanvas />
+            <DescTemplates />
         </div>
     )
 }

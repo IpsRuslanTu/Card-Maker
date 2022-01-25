@@ -6,6 +6,7 @@ const CLEAR_IMG_STATE = "CLEAR_IMG_STATE";
 const MOVE_IMG = "MOVE_IMG";
 const DELETE_IMAGE = "DELETE_IMAGE";
 const RESIZE_IMAGE = "RESIZE_IMAGE";
+const NEW_IMAGES_ARR = "NEW_IMAGES_ARR";
 
 type InsertImgType = {
     arr: Array<ImageType>
@@ -45,6 +46,13 @@ export function moveImg(index: number, x: number, y: number): AnyAction {
         index: index,
         x: x,
         y: y
+    }
+}
+
+export function pushNewImagesArrToReducer(newArr: any): AnyAction {
+    return {
+        type: "NEW_IMAGES_ARR",
+        newArr: newArr
     }
 }
 
@@ -116,6 +124,8 @@ export const ReducerImg = (state = defaultState, action: AnyAction): InsertImgTy
                 ...state,
                 arr: newArrImages2(state.arr, action.index, action.width, action.height)
             }
+        case NEW_IMAGES_ARR:
+            return { ...state, arr: action.newArr }
         default:
             return state
     }

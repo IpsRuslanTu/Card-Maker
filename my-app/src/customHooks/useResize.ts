@@ -47,7 +47,7 @@ export function useResize(
       document.addEventListener("mouseup", handleMouseUp);
     }
 
-    let ExternalBlockNewPos: positionType;
+    // let externalBlockNewPos: positionType;
 
     let newWidth: number = modelSize.width;
     let newHeight: number = modelSize.height;
@@ -87,10 +87,10 @@ export function useResize(
             x: currPos.x + delta.x,
             y: currPos.y,
           }
-          ExternalBlockNewPos = {
-            x: currPos.x + delta.x,
-            y: currPos.y,
-          }
+          // externalBlockNewPos = {
+          //   x: currPos.x + delta.x,
+          //   y: currPos.y,
+          // }
           if (newHeight > MIN_SIZE_BLOCK)
             if (currentNestedBlock != null) currentNestedBlock.style.height = `${newHeight}px`;
             if (currentExternalBlock != null) currentExternalBlock.style.height = `${newHeight}px`;
@@ -163,5 +163,5 @@ export function useResize(
       if (pointLB) pointLB.removeEventListener("mousedown", handleMousedown);
       if (pointRB) pointRB.removeEventListener("mousedown", handleMousedown);
     };
-  }, [resizeBlock, setPosition, LeftTop, RightTop, LeftBottom, RightBottom, item, modelPos, modelSize]);
+  }, [resizeBlock, setPosition, LeftTop, RightTop, LeftBottom, RightBottom, itemBlock, item, indexItem, modelPos, modelSize]);
 }

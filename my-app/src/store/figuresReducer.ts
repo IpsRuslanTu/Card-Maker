@@ -21,10 +21,9 @@ enum FiguresActionType {
     INSERT_HEART = "INSERT_HEART",
     INSERT_STAR = "INSERT_STAR",
     CLEAR_SVG_STATE = "CLEAR_SVG_STATE",
-    MOVE_SVG = "MOVE_SVG"
+    MOVE_SVG = "MOVE_SVG",
+    DELETE_SVG = "DELETE_SVG"
 }
-
-type FiguresAction = CircleAction | HeartAction | StarAction;
 
 type FigureType = {
     name: string,
@@ -77,12 +76,26 @@ export function clearSvg(): AnyAction {
     }
 }
 
+export function deleteSvg(index: number): AnyAction {
+    return {
+        type: FiguresActionType.DELETE_SVG,
+        index: index
+    }
+}
+
 export function moveSvg(index: number, x: number, y: number): AnyAction {
     return {
         type: FiguresActionType.MOVE_SVG,
         index: index,
         x: x,
         y: y
+    }
+}
+
+export function pushNewSVGArrToReducer(newArr: any): AnyAction {
+    return {
+        type: "NEW_SVG_ARR",
+        newArr: newArr
     }
 }
 
@@ -143,6 +156,16 @@ export const figuresReducer = (state = defaultState, action: AnyAction): InsertF
             return {
                 ...state,
                 arr: newArrSvg(state.arr, action.index, action.x, action.y)
+            }
+        case FiguresActionType.DELETE_SVG:
+            return {
+                ...state,
+                arr: state.arr.filter((eachElem, index) => action.index !== index)
+            }
+        case "NEW_SVG_ARR":
+            return {
+                ...state,
+                arr: action.newArr
             }
         default:
             return state

@@ -65,5 +65,5 @@ export function useDragAndDrop(
         return () => {
             if (currentItem) currentItem.removeEventListener("mousedown", handleMouseDown);
         };
-    }, [item, modelPos, setPosition]);
+    }, [item, modelPos, indexObj, setPosition]);
 }

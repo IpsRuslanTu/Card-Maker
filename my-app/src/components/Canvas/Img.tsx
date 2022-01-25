@@ -67,7 +67,7 @@ const Img = (props: PropsType & Props) => {
                 display: "inline-block", 
                 position: "absolute", 
                 left: pos.x, top: pos.y, 
-                border: borderStyle 
+                outline: borderStyle 
             }}
             ref={imgBlock}
             onDragStart={(e) => e.preventDefault()}

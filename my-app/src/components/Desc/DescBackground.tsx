@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, connect } from 'react-redux';
-import { addImgBG, changeBackground, changeHeigthCanvas, 
-    changeWidthCanvas } from '../../store/backgroundReducer';
+import {
+    addImgBG, changeBackground, changeHeigthCanvas,
+    changeWidthCanvas
+} from '../../store/backgroundReducer';
 import { RootState } from '../../store/store';
 import styles from './Desc.module.css'
 
@@ -13,7 +15,7 @@ const DescBackground = (props: Props) => {
     const selectedImageUrlRef = useRef<string>();
     const [loading, setLoading] = useState(false);
 
-    function revokeImageUrl () {
+    function revokeImageUrl() {
         if (selectedImageUrlRef.current != null) {
             window.URL.revokeObjectURL(selectedImageUrlRef.current)
         }
@@ -33,14 +35,18 @@ const DescBackground = (props: Props) => {
             if (image) {
                 selectedImageUrlRef.current = window.URL.createObjectURL(image);
 
+                let reader = new FileReader();
+                reader.readAsDataURL(image);
                 let imageWWW = new Image();
                 imageWWW.src = selectedImageUrlRef.current;
-                imageWWW.onload = function() {
-                    props.changeWidthCanvas(imageWWW.width);
-                    props.changeHeigthCanvas(imageWWW.height);
+                reader.onload = function () {
+                    let readerResult = String(reader.result);
+                    imageWWW.onload = function () {
+                        props.changeWidthCanvas(imageWWW.width);
+                        props.changeHeigthCanvas(imageWWW.height);
+                        props.addImgBG(readerResult);
+                    }
                 }
-
-                props.addImgBG(selectedImageUrlRef.current);
             }
             setLoading(true);
         }
@@ -50,51 +56,51 @@ const DescBackground = (props: Props) => {
     useEffect(() => revokeImageUrl, [])
 
     return (
-        <div 
-            className={styles.desc} 
-            style={ visibleDescBackground ? {display: "block"} : {display: "none"} }
+        <div
+            className={styles.desc}
+            style={visibleDescBackground ? { display: "block" } : { display: "none" }}
         >
-            <button 
-                className={styles.button} 
-                onClick={openSelectImageModal} 
+            <button
+                className={styles.button}
+                onClick={openSelectImageModal}
                 disabled={loading}
             >
                 from PC
             </button>
-            
+
             <input
                 ref={inputRef}
                 accept=".jpg,.png"
                 type="file"
                 multiple={false}
                 onChange={updateSelectedImage}
-                style={{display: 'none'}}
+                style={{ display: 'none' }}
             />
 
-            <hr/>
-            <br/>
+            <hr />
+            <br />
             <p className={styles.title}>Background</p>
             <p className={styles.label}>Color background:</p>
-            <input 
+            <input
                 className={styles.inputColor}
                 onChange={(e) => props.changeBackground(e.target.value)}
-                type="color" 
+                type="color"
             />
 
             <p className={styles.title}>Size canvas</p>
             <p className={styles.label}>Width:</p>
-            <input 
-                className={styles.input} 
-                type="number" 
-                value={props.width} 
-                onChange={(e) => props.changeWidthCanvas(Number(e.target.value))} 
+            <input
+                className={styles.input}
+                type="number"
+                value={props.width}
+                onChange={(e) => props.changeWidthCanvas(Number(e.target.value))}
             />
             <p className={styles.label}>Height:</p>
-            <input 
-                className={styles.input} 
-                type="number" 
-                value={props.height} 
-                onChange={(e) => props.changeHeigthCanvas(Number(e.target.value))} 
+            <input
+                className={styles.input}
+                type="number"
+                value={props.height}
+                onChange={(e) => props.changeHeigthCanvas(Number(e.target.value))}
             />
         </div>
     )
